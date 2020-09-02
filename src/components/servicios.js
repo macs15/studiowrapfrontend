@@ -79,11 +79,11 @@ const Servicios = () => {
             `}>{nombre}</h2>
             <Contenedor>
                 <div className="contenedor-listado">
-                    <div className="texto">
+                    <lu className="texto">
                         {serviciosimpresions.map( servicio => (
                             <ServicioOfrecidoPreview key={servicio.id} servicio={servicio} />
                         ))}
-                    </div>
+                    </lu>
                     <div className="img">
                         <img src={icono.publicURL} alt={nombre} />
                     </div>
