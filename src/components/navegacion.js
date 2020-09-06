@@ -1,8 +1,8 @@
 import React from 'react';
-import { AnchorLink } from "gatsby-plugin-anchor-links";
+import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import styled from '@emotion/styled';
 
-const Nav = styled.nav`
+const Navigation = styled(Nav)`
     display: flex;
     flex-direction: column;
     padding-bottom: .5rem;
@@ -15,7 +15,7 @@ const Nav = styled.nav`
     }
 `;
 
-const NavLink = styled(AnchorLink)`
+const NavLink = styled.nav`
     justify-content: flex-end;
     color: #fff;
     font-weight: 400;
@@ -40,13 +40,7 @@ const NavLink = styled(AnchorLink)`
 
 const Navegacion = () => {
     return ( 
-        <Nav>
-            <NavLink to="/#inicio">Inicio</NavLink>
-            <NavLink to="/#nos">Sobre Nós</NavLink>
-            <NavLink to="/#servicos">Serviços</NavLink>
-            <NavLink to="/#trabalhos">Trabalhos</NavLink>
-            <NavLink to="/#contato">Contato</NavLink>
-        </Nav>
+        <p>vacio</p>
      );
 }
  

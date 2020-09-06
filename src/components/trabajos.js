@@ -6,7 +6,8 @@ import Image from 'gatsby-image'
 const ContenedorTrabajos = styled.div`
     width: 100%;
     margin: 0 auto;
-    background: rgb(243, 244, 245);
+    /* background: rgb(243, 244, 245); */
+    background: #fff;
     padding: 2rem 10rem;
     h2 {
         font-weight: 700;

@@ -9,31 +9,58 @@ const Contenedor = styled.ul`
     max-width: 1400px;
     margin: 0 auto;
     padding-bottom: 2rem;
-    
+
     .contenedor-listado {
         display: flex;
-        flex-direction: column;
+        flex-direction: row-reverse;
         align-items: center;
+        justify-content: space-around;
+        margin-top: 3rem;
         .img {
             max-width: 50%;
         }
         .texto {
             max-width: 100%;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             flex-wrap: nowrap;
-            justify-content: center;
-            padding: 3rem;
-            width: auto;
-            @media (max-width: 992px) {
-                flex-wrap: wrap;
-                flex: 80%;
-                max-width: 80%;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 40%;
+            padding-left: 3rem;
+            li {
+                display: block;
+                width: 100%;
+                padding: 1rem;
+            }
+            li:nth-of-type(odd) {
+                color: #fff;
+                border-radius: 10px 0px 0px 10px;
+                background: rgba(194,33,108,1);
+                background: -moz-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%);
+                background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(194,33,108,1)), color-stop(100%, rgba(245,0,8,1)));
+                background: -webkit-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%);
+                background: -o-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%);
+                background: -ms-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%);
+                background: linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2216c', endColorstr='#f50008', GradientType=1 );
             }
             @media (max-width: 790px) {
                 flex-wrap: wrap;
-                flex: 100%;
-                max-width: 100%;
+                li {                    
+                    font-size: var(--tituloMediaq);
+                }
+            }
+            @media (min-width: 790px) {
+
+                li {
+                    &:hover {
+                        color: #fff;
+                        border-radius: 10px 0px 0px 10px;
+                        cursor: pointer;
+                        background: var(--primario);
+                    }
+                }
             }
         }
         @media (max-width: 630px) {
@@ -44,6 +71,16 @@ const Contenedor = styled.ul`
                 font-size: var(--tituloMediaq);
                 &:last-of-type {
                     margin-right: 1rem;
+                }
+                li {
+                    padding: 0 !important;
+                    background: transparent !important;
+
+                }
+                li:nth-of-type(odd) {
+                    color: var(--primario) !important;
+                    background: transparent !important;
+
                 }
             }
             .img {
@@ -71,19 +108,20 @@ const Servicios = () => {
         }
     `);
     const {nombre, icono, serviciosimpresions} = query.allStrapiSerivciosOfrecidos.nodes[0];
-    
-    return ( 
+
+    return (
         <div>
             <h2 css={css`
                 padding-top: 3rem;
+                font-weight: 700;
             `}>{nombre}</h2>
             <Contenedor>
                 <div className="contenedor-listado">
-                    <lu className="texto">
+                    <ul className="texto">
                         {serviciosimpresions.map( servicio => (
                             <ServicioOfrecidoPreview key={servicio.id} servicio={servicio} />
                         ))}
-                    </lu>
+                    </ul>
                     <div className="img">
                         <img src={icono.publicURL} alt={nombre} />
                     </div>
@@ -92,5 +130,5 @@ const Servicios = () => {
         </div>
      );
 }
- 
+
 export default Servicios;
