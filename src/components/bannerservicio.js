@@ -8,15 +8,10 @@ const Contenedor = styled.div`
     height: auto;
     margin: 0 auto;
     background: rgb(243, 244, 245);
-
-    h2 {
-        color: #9f2f39;
-        font-weight: 700;
-        padding-top: 2rem;
-    }
 `;
 
 const ContenedorServicios = styled.div`
+    background-color: #333;
     display: grid;
     grid-template-columns: 1fr;
     text-align: center;
@@ -31,6 +26,10 @@ const ContenedorServicios = styled.div`
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         column-gap: 2rem;
+    }
+    @media (max-width: 500px) {
+        width: 100%;
+        padding: 1.5rem;
     }
 `;
 

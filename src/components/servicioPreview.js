@@ -11,17 +11,34 @@ const ContenedorCards = styled.div`
         justify-content: center;
         align-items: center;
         .titulo {
+            color: #fff;
             margin-top: 2rem;
             font-weight: 700;
             font-family: 'Roboto', sans-serif;
             font-size: 1.8rem;
-            @media (max-width: 768px) {
-                font-size: var(--tituloMediaq);
-            }
         }
         .texto {
-            color: #999;
+            color: #ccc;
             text-align: center;
+            font-size: 1.5rem;
+        }
+    }
+    @media (max-width: 500px) {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        div {
+            width: 100%;
+            .texto {
+                width: 100%;
+                padding: 0%;
+            }
+            .titulo {
+                font-size: 1.6rem;
+            }
+            img {
+                width:65px;
+            }
         }
     }
 `;

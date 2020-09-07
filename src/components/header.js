@@ -1,46 +1,68 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {useStaticQuery, graphql} from 'gatsby';
 import {css} from '@emotion/core';
-import {Navbar, Nav } from 'react-bootstrap';
+import {Navbar} from 'react-bootstrap';
 import styled from '@emotion/styled';
+import Scrollspy from 'react-scrollspy';
+import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 const HeaderTag = styled(Navbar)`
-    position: fixed !important;
     width: 100%;
     background: transparent;
     padding: 1rem;
     z-index: 1;
     -webkit-transition: background-color .5s linear;
-    -ms-transition: background-color .5s linear;
-    transition: background-color .5s linear;
+        -ms-transition: background-color .5s linear;
+            transition: background-color .5s linear;
+    @media (max-width: 768px) {
+        background: #333;
+    }
     &.scrolling {
-        background-color: rgba(194,33,108,1) !important;
-        background-color: -moz-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%) !important;
-        background-color: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(194,33,108,1)), color-stop(100%, rgba(245,0,8,1))) !important;
-        background-color: -webkit-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%) !important;
-        background-color: -o-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%) !important;
-        background-color: -ms-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%) !important;
-        background-color: linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%) !important;
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2216c', endColorstr='#f50008', GradientType=1 ) !important;
-
-        .nav-scrolling {
-            color: #fff !important;
+        background-color: #333;
+    }
+    .navbar-toggler {
+        border-color: var(--primario) !important;
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255,48,25)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E"); 
         }
     }
 `;
-const ContenedorLinks = styled(Nav)`
+const ContenedorLinks = styled(Scrollspy)`
+    display: flex;
+    flex-direction: row;
     .nav-link{
-        color: #000 !important;
+        color: #fff;
         font-size: 1.6rem;
         margin-right: 1rem;
         font-weight: 700;
+        &.nav-scrolling {
+            color: var(--primario);
+            &:last-of-type {
+                border: 1.2px solid #ff3019;
+                color: #ff3019;
+            }
+            &.active {
+                color: #fff;
+            }
+        }
         @media (max-width: 992px) {
             margin-left: 4rem;
             margin-bottom: 1rem;
         }
     }
-    .scrolling {
-        background: #000 !important;
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column !important;
+        .nav-link {
+            color: var(--primario);
+            &:last-of-type {
+                border: 1.2px solid #ff3019;
+                color: #ff3019;
+            }
+            &.active {
+                color: #fff;
+            }
+        }
     }
 `;
 
@@ -51,11 +73,13 @@ const Header = () => {
     // usamos useRef para obtener la posicion actual
     const navRef = useRef();
     navRef.current = navBackground;
+
+    
     
     // obtenemos la posicion actual y lo guardamos en el state
     useEffect(() => {
       const handleScroll = () => {
-        const show = window.scrollY > 50
+        const show = window.scrollY > 50;
         if (navRef.current !== show) {
           setNavBackground(show)
         }
@@ -76,7 +100,7 @@ const Header = () => {
     `);
 
     return ( 
-        <HeaderTag id="header" className={`${navBackground ? "scrolling" : ""}`} collapseOnSelect expand="lg">
+        <HeaderTag id="header" fixed="top" className={`${navBackground ? "scrolling" : ""}`} collapseOnSelect expand="lg">
             <Navbar.Brand href="/#inicio">
                 <img height="100" css={css`
                         padding: 0;
@@ -93,19 +117,12 @@ const Header = () => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-            <ContenedorLinks className="ml-auto">
-                <Nav.Link className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} href="/#inicio">Inicio</Nav.Link>
-                <Nav.Link className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} href="/#nos">Sobre Nós</Nav.Link>
-                <Nav.Link className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} href="/#servicos">Serviços</Nav.Link>
-                <Nav.Link className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} href="/#trabalhos">Trabalhos</Nav.Link>
-                <Nav.Link className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} href="/#contato">Contato</Nav.Link>
-                {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="#nos">Inicio</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown> */}
+            <ContenedorLinks offset={-90} className="ml-auto" items={ ['inicio', 'nos', 'servicos', 'trabalhos', 'contato']} currentClassName="active">
+                <AnchorLink className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} to="/#inicio">Inicio</AnchorLink>
+                <AnchorLink className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} to="/#nos">Sobre Nós</AnchorLink>
+                <AnchorLink className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} to="/#servicos">Serviços</AnchorLink>
+                <AnchorLink className={` nav-link ${navBackground ? "nav-scrolling" : ""}`} to="/#trabalhos">Trabalhos</AnchorLink>
+                <AnchorLink className={` btn nav-link ${navBackground ? "nav-scrolling" : ""}`} to="/#contato">Contato</AnchorLink>
             </ContenedorLinks>
         </Navbar.Collapse>
         </HeaderTag>

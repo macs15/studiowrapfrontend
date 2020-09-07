@@ -8,18 +8,19 @@ module.exports = {
     `gatsby-plugin-emotion`,
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-anchor-links`,
+    {
+      resolve: "gatsby-plugin-anchor-links",
+      options: {
+        offset: -90
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
-    },
-    {
-      resolve: "gatsby-plugin-anchor-links",
-      options: {
-        offset: -65
-      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

@@ -1,99 +1,153 @@
 import React from 'react';
-import useSvg from '../hooks/use-svg';
-import heroCSS from '../css/hero.module.css';
 import styled from '@emotion/styled';
-import useInicio from '../hooks/use-inicio';
+import { ParallaxBanner, Parallax } from 'react-scroll-parallax';
 
+const Contenedor = styled.header`
+    position: relative;
 
-const Contenedor = styled.div`
-   height: 100vh;
-   position: relative;
-   z-index: -1;
-   padding-top: 7rem;
-   .wave {
-        flex: 100%;
-        max-width: 100%;
-        width: 100%;
-        height: auto;
-        img {
-            position: absolute;
-            bottom: 0%;
-            z-index: 0;
-        }
+    @keyframes showTopText {
+        0% { transform: translate3d(0, 265%, 0); }
+        40%, 60% { transform: translate3d(0, 165%, 0); }
+        100% { transform: translate3d(0, 65%, 0); }
+    }
+    @keyframes line {
+        from {width:0%;}
+        to {width:100%;}
     }
 `;
-const Contenido = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+const Contenido = styled(ParallaxBanner)`
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
     width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    .draw {
-        flex: 40%;
-        max-width: 40%;
-        display: inline-block;
-        padding: 1rem;
-        z-index:1;
-        height: 70%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .titulo {
-        flex: 60%;
-        max-width: 60%;
-        height: 70%;
-        padding: 1rem;
+    max-width: 100%;
+    background-position: bottom;
+    background-attachment: fixed;
+    background-position: center 0;
+    overflow: hidden;
+    .contenedor-titulo {
         display: flex;
         flex-wrap: wrap;
-        flex-direction: column;
         justify-content: center;
-        text-align: center;
-        h1 {
-            font-weight: 700;
-            display: inline-block;
+        align-items: center;
+        position: absolute;
+        flex: 100%;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        margin: auto;
+        background-color: rgba(0, 0, 0, .4);
+        .blur {
+            overflow: hidden;
+            width: 100vw;
+            max-width: 1600px;
+            padding: 2rem;
+            margin: auto;
+            padding: 0 6rem;
+            height: 50%;
+            display: flex; 
+            align-items: flex-start;
+            flex-direction: column;
+            top: 40%;
+            width:100%;
+            @media (min-width: 768px) {
+                &::after {
+                display: block;
+                height: 1.9rem;
+                width: 100%;
+                content: "";
+                border-bottom: 2px solid var(--primario);
+                text-align:center;
+                animation: line 1s linear forwards;
+            }
+            }
+            .texto {
+                display: inline-block;
+                font-size: 3.6rem;
+                font-family: 'Roboto', sans-serif;
+                color: #fff;
+                font-style: italic;
+                 /* animation */
+                transform: translate(0, 150%);
+                display: inline-block;
+                animation: showTopText .9s;
+                animation-delay: 1.2s;
+                animation-fill-mode: forwards;
+                margin-bottom: 2rem;
+                
+            }
         }
-        h4 {
-            color: var(--primario);
+        .titulo {
             display: inline-block;
-            padding: 4rem;
+            animation: showTopText .9s;
+            animation-delay: 1.2s;
+            animation-fill-mode: forwards;
+            bottom: 0;
+            transform: translate(0, 265%);
+            /* color: var(--primario); */
+            font-family: 'Lato', sans-serif;
+            color: #fff;
+            font-weight: 700;
+            font-size: 4.5rem;
+            text-align: end;
+            span {
+                font-weight: 400;
+                color: var(--primario);
+                font-style: italic;
+            }
         }
     }
-    @media (max-width: 992px) {
-        flex-direction: column-reverse;
-        align-items: center;
-        .titulo {
+    @media (max-width: 768px) {
+        position: relative;
+        max-width: 100%;
+        .contenedor-titulo {
+            justify-content: center;
             width: 100%;
-            justify-content: flex-start;
-        }
-        .draw {
-            width: 100%;
+            .blur {
+                align-items: center;
+                justify-content: center;
+                position: static;
+                .titulo {
+                    font-size: 3.6rem
+                }
+                .texto {
+                    font-size: 1.6rem;
+                }
+            }
+
         }
     }
 `;
 
 const SeccionPrincipal = () => {
 
-    // Extraemos los svg
-    const files = useSvg();
-    const anuncio = useInicio();
-    const {draw} = anuncio[0];
-    
     return ( 
         <Contenedor>
-            <Contenido>
-                <div className="titulo">
-                    <h1 className={heroCSS.titulo}>Comunicação Visual</h1>
-                </div>
-                <div className="draw">
-                    <img src={draw.publicURL} alt="" /> {/* draw */}
-                </div>
+            <Contenido
+                layers={[
+                    {
+                        image: 'https://cdn.pixabay.com/photo/2018/11/04/16/28/london-3794348_960_720.jpg' ,
+                        amount: .5,
+                    }
+                ]}
+                style={{
+                    height: '700px',
+                }}
+            >
+                <Parallax 
+                    className="contenedor-titulo"
+                    y={['-200px', '300px' ]}
+                    tagOuter="figure"
+                >
+                    <div 
+                        className="blur"
+                        
+                    >
+                        <h1 className="titulo">Studio <span>Wrap</span></h1>
+                        <p className="texto">Sua solução em Comunicação Visual</p>
+                    </div>
+                </Parallax>
             </Contenido>
-            <div className="wave">
-                    <img src={files[1].publicURL} alt=""/> {/* waves */}
-            </div>
         </Contenedor>
      );
 }

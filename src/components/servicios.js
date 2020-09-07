@@ -27,7 +27,7 @@ const Contenedor = styled.ul`
             justify-content: flex-start;
             align-items: flex-start;
             width: 40%;
-            padding-left: 3rem;
+            padding-left: 1rem;
             li {
                 display: block;
                 width: 100%;
@@ -65,10 +65,12 @@ const Contenedor = styled.ul`
         }
         @media (max-width: 630px) {
             flex-direction: row-reverse;
+            flex-wrap: wrap;
             .texto {
                 flex-direction: column;
                 align-items: flex-end;
                 font-size: var(--tituloMediaq);
+                padding: 0;
                 &:last-of-type {
                     margin-right: 1rem;
                 }
@@ -84,7 +86,14 @@ const Contenedor = styled.ul`
                 }
             }
             .img {
-                padding-left: 2rem;
+                padding-left: .5rem;
+            }
+        }
+        @media (max-width: 630px) {
+            .texto {
+                h3 {
+                    font-size: 1.4rem;
+                }
             }
         }
     }

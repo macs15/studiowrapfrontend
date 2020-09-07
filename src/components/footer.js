@@ -39,8 +39,8 @@ const Ubicacion = styled.div`
     align-items: center;
     .texto {
         color: #fff;   
-        margin-top: 0;
         text-align: center;
+        vertical-align: middle;
         font-size: 1.5rem;
         @media (max-width: 768px) {
             font-size: 1.3rem;
@@ -65,12 +65,19 @@ const RedesSociales = styled.div`
         text-align: center;
         padding-bottom: 2rem;
         .iconos {
+            display: flex;
+            align-items: center;
             margin-right: 1.5rem;
             color: var(--primario);
                 transition: all .3s ease;
             &:hover {
                 cursor: pointer;
-                transform: scale(1.2, 1.2);
+                color: #fff;
+                transform: scale(1.4, 1.4);
+                &:last-of-type {
+                    cursor: auto;
+                    transform: scale(1.2, 1.2);
+                }
             }
             &:last-of-type {
                 margin-right: 0;
@@ -92,6 +99,8 @@ const RedesSociales = styled.div`
             margin: 0;
             padding: 0;
             color: #fff;
+            font-size: 1.4rem;
+
             @media (max-width: 768px) {
             font-size: 1.3rem;
             }
@@ -181,20 +190,20 @@ const Footer = () => {
                     <p className="titulo">Contato</p>
                     <div className="contenedor-redes-sociales">
                         <div className="iconos instagram">
-                            <FontAwesomeIcon icon={faInstagram} size="2x" />
+                            <FontAwesomeIcon icon={faInstagram} size="3x" />
                         </div>
                         <div className="iconos facebook">
-                            <FontAwesomeIcon icon={faFacebook} size="2x" />
+                            <FontAwesomeIcon icon={faFacebook} size="3x" />
                         </div>
                         <div className="iconos twitter">
-                            <FontAwesomeIcon icon={faTwitter} size="2x" />
+                            <FontAwesomeIcon icon={faTwitter} size="3x" />
                         </div>
                         <div className="iconos youtube">
-                            <FontAwesomeIcon icon={faYoutube} size="2x" />
+                            <FontAwesomeIcon icon={faYoutube} size="3x" />
                         </div>
                         <div className="iconos wsp">
-                            <FontAwesomeIcon size="2x" icon={faWhatsapp}/> 
-                            <p className="texto">&nbsp; +55 47 999-1234567</p>
+                            <FontAwesomeIcon size="3x" icon={faWhatsapp}/> 
+                            <p className="texto">&nbsp; (47) 999-1234567</p>
                         </div>
                     </div>
                 </RedesSociales>
@@ -202,7 +211,7 @@ const Footer = () => {
             <PoweredBy>
                 <p className="copyright">&#169; 2020 Studio Wrap Soluções Visuais | <span> Todos os direitos reservados.</span></p> 
                 <div className="contenedor-author">
-                    <p className="author">Desenvolvido por <a href="https://github.com/macs15" target="_blank">Maykell Carrillo</a></p>
+                    <p className="author">Desenvolvido por <a href="https://github.com/macs15" rel="noreferrer" target="_blank">Maykell Carrillo</a></p>
                     <FontAwesomeIcon className="icon github" icon={faGithubAlt} size="2x" />
                     <FontAwesomeIcon className="icon facebook" icon={faFacebook} size="2x" />
                     <FontAwesomeIcon className="icon twitter" icon={faTwitter} size="2x" />

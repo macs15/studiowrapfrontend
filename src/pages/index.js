@@ -1,48 +1,44 @@
 import React from 'react'
 import styled from '@emotion/styled';
-import BackgroundImage from 'gatsby-background-image';
+import {css} from '@emotion/core';
 import Layout from '../components/layout';
-import useInicio from '../hooks/use-inicio';
 import Nosotros from '../components/nosotros';
 import Trabajos from '../components/trabajos';
 import BannerServicios from '../components/bannerservicio';
 import SeccionPrincipal from '../components/principal';
 import Servicios from '../components/servicios';
 import Footer from '../components/footer';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 const Contenedor = styled.div`
     position: relative;
 `;
-const ImagenBackground = styled(BackgroundImage)`
-    background-repeat: repeat;
-    background-size: auto;
-`;
 
 
 const Index = () => {
-
-    const inicio = useInicio();
-    const { imagen } = inicio[0];
         
     return ( 
-        <>
+        <ParallaxProvider>
             <Contenedor>
                 <Layout />
-                <ImagenBackground
-                    id="inicio"
-                    tag="section"
-                    fluid={imagen.sharp.fluid}
-                    fadeIn="soft"
-                >
-                <SeccionPrincipal />
 
-                </ImagenBackground>
+                <div id="inicio">
+                    <SeccionPrincipal/>
+                </div>
+                
                 <main>
-                    <div id="nos">
+                    <div css={css`
+                        /* padding-top: 90px; */
+                        background-color: #ccc3;
+                    `} 
+                        id="nos"
+                    >
                         <Nosotros />
                     </div>
 
-                    <div id="servicos">
+                    <div css={css`
+                        /* padding-top: 90px; */
+                    `} id="servicos">
                         <Servicios />
                     </div>
 
@@ -50,15 +46,19 @@ const Index = () => {
                         <BannerServicios />
                     </div>
 
-                    <div id="trabalhos">
+                    <div css={css`
+                        /* padding-top: 90px; */
+                    `} id="trabalhos">
                         <Trabajos />
                     </div>
-                    <div id="contato">
+                    <div css={css`
+                        /* padding-top: 90px; */
+                    `} id="contato">
                         <Footer />
                     </div>
                 </main>
             </Contenedor>
-        </>
+        </ParallaxProvider>
      );
 }
  
