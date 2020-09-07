@@ -31,9 +31,12 @@ const Contenedor = styled.ul`
             li {
                 display: block;
                 width: 100%;
-                padding: 1rem;
+                span {
+                    color: #000;
+                }
             }
-            li:nth-of-type(odd) {
+            li {
+                margin-bottom: .5rem;
                 color: #fff;
                 border-radius: 10px 0px 0px 10px;
                 background: rgba(194,33,108,1);
@@ -44,6 +47,9 @@ const Contenedor = styled.ul`
                 background: -ms-linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%);
                 background: linear-gradient(45deg, rgba(194,33,108,1) 0%, rgba(245,0,8,1) 100%);
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2216c', endColorstr='#f50008', GradientType=1 );
+                span {
+                    color: #fff;
+                }
             }
             @media (max-width: 790px) {
                 flex-wrap: wrap;
@@ -64,34 +70,35 @@ const Contenedor = styled.ul`
             }
         }
         @media (max-width: 630px) {
-            flex-direction: row-reverse;
+            flex-direction: column-reverse;
             flex-wrap: wrap;
             .texto {
+                margin-top: 1rem;
                 flex-direction: column;
                 align-items: flex-end;
                 font-size: var(--tituloMediaq);
-                padding: 0;
+                padding: 1rem;
+                width: 80%;
                 &:last-of-type {
                     margin-right: 1rem;
                 }
                 li {
                     padding: 0 !important;
-                    background: transparent !important;
-
                 }
                 li:nth-of-type(odd) {
                     color: var(--primario) !important;
-                    background: transparent !important;
-
                 }
             }
             .img {
                 padding-left: .5rem;
+                img {
+                    background-size: cover;
+                }
             }
         }
         @media (max-width: 630px) {
             .texto {
-                h3 {
+                button {
                     font-size: 1.4rem;
                 }
             }
@@ -100,6 +107,7 @@ const Contenedor = styled.ul`
 `;
 
 const Servicios = () => {
+
     const query = useStaticQuery(graphql`
         query {
             allStrapiSerivciosOfrecidos {
@@ -109,8 +117,9 @@ const Servicios = () => {
                     publicURL
                     }
                     serviciosimpresions {
-                    id
-                    nombre
+                        id
+                        nombre
+                        descripcion
                     }
                 }
             }

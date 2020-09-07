@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
         function handleWindowSizeChange() {
             
             // activamos/desactivamos parallax
-            guardarIsDisable( window.innerWidth < 768 );
+            guardarIsDisable( window.innerWidth <= 768 );
         };
 
         window.addEventListener('resize', handleWindowSizeChange);

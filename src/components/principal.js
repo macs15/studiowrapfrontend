@@ -39,18 +39,17 @@ const Contenido = styled(ParallaxBanner)`
         background-color: rgba(0, 0, 0, .4);
         .blur {
             overflow: hidden;
-            width: 100vw;
+            width: 100%;
             max-width: 1600px;
             padding: 2rem;
             margin: auto;
-            padding: 0 6rem;
             height: 50%;
             display: flex; 
             align-items: flex-start;
             flex-direction: column;
             top: 40%;
-            width:100%;
             @media (min-width: 768px) {
+                padding: 0 6rem;
                 &::after {
                 display: block;
                 height: 1.9rem;
@@ -59,7 +58,24 @@ const Contenido = styled(ParallaxBanner)`
                 border-bottom: 2px solid var(--primario);
                 text-align:center;
                 animation: line 1s linear forwards;
-            }
+                }
+                .texto {
+                     /* animation */
+                    transform: translate(0, 150%);
+                    display: inline-block;
+                    animation: showTopText .9s;
+                    animation-delay: 1.2s;
+                    animation-fill-mode: forwards;
+                    margin-bottom: 2rem;
+                }
+                .titulo {
+                display: inline-block;
+                animation: showTopText .9s;
+                animation-delay: 1.2s;
+                animation-fill-mode: forwards;
+                bottom: 0;
+                transform: translate(0, 265%);
+                }
             }
             .texto {
                 display: inline-block;
@@ -67,23 +83,9 @@ const Contenido = styled(ParallaxBanner)`
                 font-family: 'Roboto', sans-serif;
                 color: #fff;
                 font-style: italic;
-                 /* animation */
-                transform: translate(0, 150%);
-                display: inline-block;
-                animation: showTopText .9s;
-                animation-delay: 1.2s;
-                animation-fill-mode: forwards;
-                margin-bottom: 2rem;
-                
             }
         }
         .titulo {
-            display: inline-block;
-            animation: showTopText .9s;
-            animation-delay: 1.2s;
-            animation-fill-mode: forwards;
-            bottom: 0;
-            transform: translate(0, 265%);
             /* color: var(--primario); */
             font-family: 'Lato', sans-serif;
             color: #fff;
@@ -107,14 +109,50 @@ const Contenido = styled(ParallaxBanner)`
                 align-items: center;
                 justify-content: center;
                 position: static;
+                padding: 0 6rem;
+                &::after {
+                display: block;
+                height: 1rem;
+                width: 100%;
+                content: "";
+                border-bottom: 2px solid var(--primario);
+                text-align:center;
+                animation: line 1s linear forwards;
+                }
                 .titulo {
                     font-size: 3.6rem
                 }
                 .texto {
-                    font-size: 1.6rem;
+                    font-size: 2.9rem;
                 }
             }
-
+        }
+    }
+    @media (max-width: 650px) {
+        .contenedor-titulo {
+            top: 10%;
+            .blur {
+                .titulo {
+                    font-size: 3rem;
+                }
+                .texto {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+    @media (max-width: 300px) {
+        .contenedor-titulo {
+            top: 10%;
+            overflow: hidden;
+            .blur {
+                .titulo {
+                    font-size:2.6rem;
+                }
+                .texto {
+                    font-size: 1.5rem;
+                }
+            }
         }
     }
 `;
