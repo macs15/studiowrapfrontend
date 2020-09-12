@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import ServicioOfrecidoPreview from './servicioOfrecidoPreview';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
+import { Accordion } from 'react-bootstrap';
 
-const Contenedor = styled.ul`
+const Contenedor = styled.div`
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
@@ -17,7 +18,7 @@ const Contenedor = styled.ul`
         justify-content: space-around;
         margin-top: 3rem;
         .img {
-            max-width: 50%;
+            max-width: 35%;
         }
         .texto {
             max-width: 100%;
@@ -26,16 +27,16 @@ const Contenedor = styled.ul`
             flex-wrap: nowrap;
             justify-content: flex-start;
             align-items: flex-start;
-            width: 40%;
+            width: 55%;
             padding-left: 1rem;
-            li {
+            .contenedor {
                 display: block;
                 width: 100%;
                 span {
                     color: #000;
                 }
             }
-            li {
+            .contenedor {
                 margin-bottom: .5rem;
                 color: #fff;
                 border-radius: 10px 0px 0px 10px;
@@ -53,13 +54,13 @@ const Contenedor = styled.ul`
             }
             @media (max-width: 790px) {
                 flex-wrap: wrap;
-                li {                    
+                .contenedor {                    
                     font-size: var(--tituloMediaq);
                 }
             }
             @media (min-width: 790px) {
 
-                li {
+                .contenedor {
                     &:hover {
                         color: #fff;
                         border-radius: 10px 0px 0px 10px;
@@ -108,6 +109,8 @@ const Contenedor = styled.ul`
 
 const Servicios = () => {
 
+    const [activeId, setActiveId] = useState(0);
+
     const query = useStaticQuery(graphql`
         query {
             allStrapiSerivciosOfrecidos {
@@ -120,13 +123,20 @@ const Servicios = () => {
                         id
                         nombre
                         descripcion
+                        imagen {
+                            publicURL
+                        }
                     }
                 }
             }
         }
     `);
-    const {nombre, icono, serviciosimpresions} = query.allStrapiSerivciosOfrecidos.nodes[0];
+    
+    function handlerChange(newValue) {
+        setActiveId(newValue);
+    }
 
+    const {nombre, icono, serviciosimpresions} = query.allStrapiSerivciosOfrecidos.nodes[0];
     return (
         <div>
             <h2 css={css`
@@ -135,11 +145,11 @@ const Servicios = () => {
             `}>{nombre}</h2>
             <Contenedor>
                 <div className="contenedor-listado">
-                    <ul className="texto">
+                    <Accordion className="texto" defaultActiveKey={1}>
                         {serviciosimpresions.map( servicio => (
-                            <ServicioOfrecidoPreview key={servicio.id} servicio={servicio} />
+                            <ServicioOfrecidoPreview key={servicio.id} servicio={servicio} onChange={handlerChange} activeId={activeId} />
                         ))}
-                    </ul>
+                    </Accordion>
                     <div className="img">
                         <img src={icono.publicURL} alt={nombre} />
                     </div>

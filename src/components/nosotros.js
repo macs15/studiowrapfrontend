@@ -46,7 +46,7 @@ const NosotrosSection = styled.section`
 const TextContainer = styled.div`
     position: relative;
     width: 50%;
-    z-index: 3;
+    z-index: 1;
     top: -20px;
     border-radius: 15px;
     padding: 2rem 2.5rem;

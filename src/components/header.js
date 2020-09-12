@@ -10,7 +10,7 @@ const HeaderTag = styled(Navbar)`
     width: 100%;
     background: transparent;
     padding: 1rem;
-    z-index: 1;
+    z-index: 3;
     -webkit-transition: background-color .5s linear;
         -ms-transition: background-color .5s linear;
             transition: background-color .5s linear;
